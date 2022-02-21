@@ -1,4 +1,4 @@
-import Vue from 'vue'
+/* import Vue from 'vue'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 
@@ -14,4 +14,4 @@ requireComponent.keys().forEach(fileName => {
   )
 
   Vue.component(`Base${componentName}`, componentConfig.default || componentConfig)
-})
+}) */

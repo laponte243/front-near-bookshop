@@ -103,6 +103,7 @@
                 class="ma-2"
                 outlined
                 color="#8686bd"
+                @click="saveData()"
               >
                 Guardar
               </v-btn>
@@ -115,7 +116,16 @@
 </template>
 
 <script>
-  // import axios from 'axios'
+  import * as nearAPI from 'near-api-js'
+  const { connect, keyStores, WalletConnection, Contract } = nearAPI
+  const config = {
+    networkId: 'testnet',
+    keyStore: new keyStores.BrowserLocalStorageKeyStore(),
+    nodeUrl: 'https://rpc.testnet.near.org',
+    walletUrl: 'https://wallet.testnet.near.org',
+    helperUrl: 'https://helper.testnet.near.org',
+    explorerUrl: 'https://explorer.testnet.near.org',
+  }
   export default {
     data () {
       return {
@@ -130,8 +140,49 @@
       }
     },
     mounted () {
+      this.getData()
     },
     methods: {
+      async saveData () {
+        alert('Aqui')
+        const CONTRACT_NAME = 'book.bookshop.testnet'
+        // connect to NEAR
+        const near = await connect(config)
+        // create wallet connection
+        const wallet = new WalletConnection(near)
+        const contract = new Contract(wallet.account(), CONTRACT_NAME, {
+          changeMethods: ['set_profile'],
+          sender: wallet.account(),
+        })
+        if (wallet.isSignedIn()) {
+          await contract.set_profile(
+            {
+              name: 'Linda 2',
+              last_name: 'Rosario 2',
+              email: 'lindaleyrosario@gmail.com2',
+              bio: 'Contenido2',
+              website: 'http://example.com2',
+            },
+          )
+        }
+      },
+      async getData () {
+        const CONTRACT_NAME = 'book.bookshop.testnet'
+        // connect to NEAR
+        const near = await connect(config)
+        // create wallet connection
+        const wallet = new WalletConnection(near)
+        const contract = new Contract(wallet.account(), CONTRACT_NAME, {
+          changeMethods: ['get_profile'],
+          sender: wallet.account(),
+        })
+        if (wallet.isSignedIn()) {
+          const response = await contract.get_profile({
+            user_id: wallet.account(),
+          })
+          console.log(response)
+        }
+      },
     },
   }
 </script>

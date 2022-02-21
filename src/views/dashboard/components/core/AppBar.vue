@@ -148,7 +148,6 @@
           // returns account Id as string
           const walletAccountId = wallet.getAccountId()
           this.accountId = walletAccountId
-          console.log(walletAccountId)
         }
       },
       async signOut () {

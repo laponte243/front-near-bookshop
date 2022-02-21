@@ -32,7 +32,7 @@
               <a href="/product">
                 <v-img
                   class="hover imgCarousel"
-                  :src="require('../../assets/img/home/' + itemC.src1)"
+                  :src="require('../../assets/img/' + itemC.src1)"
                 />
               </a>
             </div>
@@ -45,7 +45,7 @@
               <a href="/product">
                 <v-img
                   class="hover imgCarousel"
-                  :src="require('../../assets/img/home/' + itemC.src2)"
+                  :src="require('../../assets/img/' + itemC.src2)"
                 />
               </a>
             </div>
@@ -58,7 +58,7 @@
               <a href="/product">
                 <v-img
                   class="hover imgCarousel"
-                  :src="require('../../assets/img/home/' + itemC.src1)"
+                  :src="require('../../assets/img/' + itemC.src3)"
                 />
               </a>
             </div>
@@ -214,6 +214,18 @@
           </div>
         </v-card-text>
       </v-col>
+      <div class="text-center mt-2">
+        <v-btn
+          class="black--text text-caption"
+          href="/shop"
+          text
+        >
+          Explorar
+          <v-icon class="black--text text-caption">
+            mdi-arrow-right
+          </v-icon>
+        </v-btn>
+      </div>
     </v-container>
     <v-container>
       <v-row no-gutters>
@@ -233,7 +245,10 @@
               show-arrows-on-hover
               height="230"
             >
-              <v-carousel-item>
+              <v-carousel-item
+                v-for="(itemsW, i) in writes"
+                :key="i"
+              >
                 <v-row align-content="center">
                   <v-col
                     class="col-12 col-md-3 col-sm-6 col-xs-6 text-center"
@@ -241,12 +256,14 @@
                   >
                     <v-card class="hover2">
                       <v-img
-                        :src="require('../../assets/img/avatars/imagenAvatar1.png')"
+                        :src="require('../../assets/img/' + itemsW.src1)"
                         class="white--text align-end"
                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                         height="200px"
                       >
-                        <v-card-title>Kim Slater</v-card-title>
+                        <v-card-title>
+                          {{ itemsW.name1 }}
+                        </v-card-title>
                       </v-img>
                     </v-card>
                   </v-col>
@@ -256,12 +273,14 @@
                   >
                     <v-card class="hover2">
                       <v-img
-                        :src="require('../../assets/img/avatars/imagenAvatar2.png')"
+                        :src="require('../../assets/img/' + itemsW.src2)"
                         class="white--text align-end"
                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                         height="200px"
                       >
-                        <v-card-title>Bran Stoker</v-card-title>
+                        <v-card-title>
+                          {{ itemsW.name2 }}
+                        </v-card-title>
                       </v-img>
                     </v-card>
                   </v-col>
@@ -271,12 +290,14 @@
                   >
                     <v-card class="hover2">
                       <v-img
-                        :src="require('../../assets/img/avatars/imagenAvatar3.png')"
+                        :src="require('../../assets/img/' + itemsW.src3)"
                         class="white--text align-end"
                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                         height="200px"
                       >
-                        <v-card-title>Lauren Grant</v-card-title>
+                        <v-card-title>
+                          {{ itemsW.name3 }}
+                        </v-card-title>
                       </v-img>
                     </v-card>
                   </v-col>
@@ -286,76 +307,14 @@
                   >
                     <v-card class="hover2">
                       <v-img
-                        :src="require('../../assets/img/avatars/imagenAvatar4.png')"
+                        :src="require('../../assets/img/' + itemsW.src4)"
                         class="white--text align-end"
                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                         height="200px"
                       >
-                        <v-card-title>Lucas LLoyd</v-card-title>
-                      </v-img>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-carousel-item>
-              <v-carousel-item>
-                <v-row align-content="center">
-                  <v-col
-                    class="col-12 col-md-3 col-sm-6 col-xs-6 text-center"
-                    align-self="center"
-                  >
-                    <v-card class="hover2">
-                      <v-img
-                        :src="require('../../assets/img/avatars/imagenAvatar5.png')"
-                        class="white--text align-end"
-                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                        height="200px"
-                      >
-                        <v-card-title>Alba Palacio</v-card-title>
-                      </v-img>
-                    </v-card>
-                  </v-col>
-                  <v-col
-                    class="col-12 col-md-3 col-sm-6 col-xs-6 text-center"
-                    align-self="center"
-                  >
-                    <v-card class="hover2">
-                      <v-img
-                        :src="require('../../assets/img/avatars/imagenAvatar6.png')"
-                        class="white--text align-end"
-                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                        height="200px"
-                      >
-                        <v-card-title>Bill Hollen</v-card-title>
-                      </v-img>
-                    </v-card>
-                  </v-col>
-                  <v-col
-                    class="col-12 col-md-3 col-sm-6 col-xs-6 text-center"
-                    align-self="center"
-                  >
-                    <v-card class="hover2">
-                      <v-img
-                        :src="require('../../assets/img/avatars/imagenAvatar7.png')"
-                        class="white--text align-end"
-                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                        height="200px"
-                      >
-                        <v-card-title>Victoria Aveyard</v-card-title>
-                      </v-img>
-                    </v-card>
-                  </v-col>
-                  <v-col
-                    class="col-12 col-md-3 col-sm-6 col-xs-6 text-center"
-                    align-self="center"
-                  >
-                    <v-card class="hover2">
-                      <v-img
-                        :src="require('../../assets/img/avatars/imagenAvatar8.png')"
-                        class="white--text align-end"
-                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                        height="200px"
-                      >
-                        <v-card-title>Roberto Dubuc</v-card-title>
+                        <v-card-title>
+                          {{ itemsW.name4 }}
+                        </v-card-title>
                       </v-img>
                     </v-card>
                   </v-col>
@@ -379,7 +338,11 @@
             </v-card-title>
             <v-divider />
             <div class="row">
-              <div class="col-xs-6 col-sm-4 col-md-3 col text-center">
+              <div
+                v-for="(itemsO, i) in offers"
+                :key="i"
+                class="col-xs-6 col-sm-4 col-md-3 col text-center"
+              >
                 <v-hover
                   v-slot:default="{ hover }"
                   open-delay="200"
@@ -390,141 +353,30 @@
                   >
                     <v-img
                       class="white--text align-end imgOffers"
-                      :src="require('../../assets/img/home/libro8.jpg')"
+                      :src="require('../../assets/img/' + itemsO.img)"
                     >
-                      <v-card-title>Smart</v-card-title>
+                      <v-card-title>
+                        {{ itemsO.name }}
+                      </v-card-title>
                     </v-img>
 
                     <v-card-text class="text--primary text-left">
                       <div>
                         <strong>
-                          Kim Slater
+                          {{ itemsO.Author }}
                         </strong>
                       </div>
-                      <div>10 NEAR</div>
-                      <div>10 Copias</div>
+                      <div>
+                        {{ itemsO.price }}
+                      </div>
+                      <div>
+                        {{ itemsO.copy }}
+                      </div>
                     </v-card-text>
 
                     <div class="text-right">
                       <v-btn
                         href="/shop"
-                        class="ma-2"
-                        outlined
-                        color="info"
-                      >
-                        Explorar
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-xs-6 col-sm-4 col-md-3 col text-center">
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="200"
-                >
-                  <v-card
-                    :elevation="hover ? 16 : 2"
-                    align="center"
-                  >
-                    <v-img
-                      class="white--text align-end imgOffers"
-                      :src="require('../../assets/img/home/libro9.jpg')"
-                    >
-                      <v-card-title>Dracula </v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-left">
-                      <div>
-                        <strong>
-                          Bram Stoker
-                        </strong>
-                      </div>
-                      <div>15 NEAR</div>
-                      <div>10 Copias</div>
-                    </v-card-text>
-
-                    <div class="text-right">
-                      <v-btn
-                        href="/shop"
-                        class="ma-2"
-                        outlined
-                        color="info"
-                      >
-                        Explorar
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-xs-6 col-sm-4 col-md-3 col text-center d-none d-sm-flex">
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="200"
-                >
-                  <v-card
-                    :elevation="hover ? 16 : 2"
-                    align="center"
-                  >
-                    <v-img
-                      class="white--text align-end imgOffers"
-                      :src="require('../../assets/img/home/libro1.png')"
-                    >
-                      <v-card-title>El camino de la miseria</v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-left">
-                      <div>
-                        <strong>
-                          Lauren Grant
-                        </strong>
-                      </div>
-                      <div>10 NEAR</div>
-                      <div>10 Copias</div>
-                    </v-card-text>
-
-                    <div class="text-right">
-                      <v-btn
-                        href="/shop"
-                        class="ma-2"
-                        outlined
-                        color="info"
-                      >
-                        Explorar
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-xs-6 col-sm-4 col-md-3 col text-center d-none d-md-flex">
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="200"
-                >
-                  <v-card
-                    :elevation="hover ? 16 : 2"
-                    align="center"
-                  >
-                    <v-img
-                      class="white--text align-end imgOffers"
-                      :src="require('../../assets/img/home/libro2.jpg')"
-                    >
-                      <v-card-title>The Arrivals</v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-left">
-                      <div>
-                        <strong>
-                          Lucas LLoyd
-                        </strong>
-                      </div>
-                      <div>10 NEAR</div>
-                      <div>10 Copias</div>
-                    </v-card-text>
-
-                    <div class="text-right">
-                      <v-btn
-                        href="/product"
                         class="ma-2"
                         outlined
                         color="info"
@@ -568,10 +420,10 @@
             class="col-12 col-md-6 col-sm-6 pt-0 pb-0 mt-0 mb-0"
             align-self="center"
           >
-            <img
+            <v-img
               class="d-none d-sm-flex imgPublica"
-              src="../../assets/img/home/publica.png"
-            >
+              :src="require('../../assets/img/home/publica.png')"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -587,24 +439,76 @@
       return {
         itemsCarousel: [
           {
-            src1: 'libro2.jpg',
-            src2: 'libro3.jpg',
-            src3: 'libro4.jpg',
+            src1: 'home/libro2.jpg',
+            src2: 'home/libro3.jpg',
+            src3: 'home/libro4.jpg',
           },
           {
-            src1: 'libro5.jpg',
-            src2: 'libro6.jpg',
-            src3: 'libro7.jpg',
+            src1: 'home/libro5.jpg',
+            src2: 'home/libro6.jpg',
+            src3: 'home/libro7.jpg',
           },
           {
-            src1: 'libro8.jpg',
-            src2: 'libro9.jpg',
-            src3: 'libro1.jpg',
+            src1: 'home/libro8.jpg',
+            src2: 'home/libro9.jpg',
+            src3: 'home/libro1.png',
           },
           {
-            src1: 'libro4.jpg',
-            src2: 'libro5.jpg',
-            src3: 'libro6.jpg',
+            src1: 'home/libro4.jpg',
+            src2: 'home/libro5.jpg',
+            src3: 'home/libro6.jpg',
+          },
+        ],
+        writes: [
+          {
+            src1: 'avatars/imagenAvatar1.png',
+            name1: 'Kim Slater',
+            src2: 'avatars/imagenAvatar2.png',
+            name2: 'Bran Stoker',
+            src3: 'avatars/imagenAvatar3.png',
+            name3: 'Lauren Grant',
+            src4: 'avatars/imagenAvatar4.png',
+            name4: 'Lucas LLoyd',
+          },
+          {
+            src1: 'avatars/imagenAvatar5.png',
+            name1: 'Alba Palacio',
+            src2: 'avatars/imagenAvatar6.png',
+            name2: 'Bill Hollen',
+            src3: 'avatars/imagenAvatar7.png',
+            name3: 'Victoria Aveyard',
+            src4: 'avatars/imagenAvatar8.png',
+            name4: 'Roberto Dubuc',
+          },
+        ],
+        offers: [
+          {
+            img: 'home/libro8.jpg',
+            nombre: 'Smart',
+            Author: 'Kim Slater',
+            price: '10 NEAR',
+            copy: '10 Copias',
+          },
+          {
+            img: 'home/libro9.jpg',
+            nombre: 'Dracula',
+            Author: 'Bram Stoker',
+            price: '15 NEAR',
+            copy: '10 Copias',
+          },
+          {
+            img: 'home/libro1.png',
+            nombre: 'El camino de la miseria',
+            Author: 'Lauren Grant',
+            price: '15 NEAR',
+            copy: '10 Copias',
+          },
+          {
+            img: 'home/libro2.jpg',
+            nombre: 'The Arrivals',
+            Author: 'Kim Slater',
+            price: '10 NEAR',
+            copy: '10 Copias',
           },
         ],
       }

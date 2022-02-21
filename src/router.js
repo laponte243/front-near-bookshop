@@ -21,7 +21,7 @@ export default new Router({
         {
           name: 'User',
           path: 'pages/user',
-          component: () => import('@/views/dashboard/pages/users'),
+          component: () => import('@/views/dashboard/pages/users/users'),
         },
       ],
     },
