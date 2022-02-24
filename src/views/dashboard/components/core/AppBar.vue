@@ -35,25 +35,25 @@
           align-self="center"
         >
           <a
-            href="/"
+            href="/app"
             style="text-decoration: none"
             class="black--text"
           >
             <span>Home &nbsp;&nbsp;</span>
           </a>
           <a
-            href="/product"
+            href="/app#/pages/market"
             style="text-decoration: none"
             class="black--text"
           >
             <span>Libros &nbsp;&nbsp;</span>
           </a>
           <a
-            href="/product"
+            href="/app#/pages/market"
             style="text-decoration: none"
             class="black--text"
           >
-            <span>Contacto &nbsp;&nbsp;</span>
+            <span>Mercado &nbsp;&nbsp;</span>
           </a>
         </v-col>
         <v-spacer />
@@ -98,15 +98,8 @@
   // Utilities
   import { mapState, mapMutations } from 'vuex'
   import * as nearAPI from 'near-api-js'
+  import { CONFIG } from '@/services/api'
   const { connect, keyStores, WalletConnection } = nearAPI
-  const config = {
-    networkId: 'testnet',
-    keyStore: new keyStores.BrowserLocalStorageKeyStore(),
-    nodeUrl: 'https://rpc.testnet.near.org',
-    walletUrl: 'https://wallet.testnet.near.org',
-    helperUrl: 'https://helper.testnet.near.org',
-    explorerUrl: 'https://explorer.testnet.near.org',
-  }
 
   export default {
     name: 'DashboardCoreAppBar',
@@ -128,11 +121,11 @@
       }),
       async signIn () {
         // connect to NEAR
-        const near = await connect(config)
+        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
         // create wallet connection
         const wallet = new WalletConnection(near)
         wallet.requestSignIn(
-          'bookshop.testnet', // contract requesting access
+          'book.bookshop.testnet', // contract requesting access
           'Near-BookShop', // optional
           'http://localhost:8080/app/#/', // optional
           'http://YOUR-URL.com/failure', // optional
@@ -140,7 +133,7 @@
       },
       async isSigned () {
         // connect to NEAR
-        const near = await connect(config)
+        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
         // create wallet connection
         const wallet = new WalletConnection(near)
         if (wallet.isSignedIn()) {
@@ -152,11 +145,12 @@
       },
       async signOut () {
         // connect to NEAR
-        const near = await connect(config)
+        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
         // create wallet connection
         const wallet = new WalletConnection(near)
 
         wallet.signOut()
+        this.sesion = false
         this.$router.go()
       },
     },

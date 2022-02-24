@@ -23,6 +23,16 @@ export default new Router({
           path: 'pages/user',
           component: () => import('@/views/dashboard/pages/users/users'),
         },
+        {
+          name: 'Market',
+          path: 'pages/market',
+          component: () => import('@/views/dashboard/pages/market/market'),
+        },
+        {
+          name: 'product',
+          path: 'pages/product',
+          component: () => import('@/views/dashboard/pages/product/product'),
+        },
       ],
     },
   ],

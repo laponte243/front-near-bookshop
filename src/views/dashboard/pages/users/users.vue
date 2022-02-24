@@ -21,6 +21,7 @@
           <v-row>
             <v-col>
               <v-text-field
+                v-model="profile.name"
                 label="Nombres"
                 style="box-shadow: -2px 0px #8686bd;"
                 solo
@@ -28,6 +29,7 @@
             </v-col>
             <v-col>
               <v-text-field
+                v-model="profile.last_name"
                 label="Apellidos"
                 style="box-shadow: -2px 0px #8686bd;"
                 solo
@@ -44,6 +46,7 @@
             </v-col>
             <v-col>
               <v-text-field
+                v-model="profile.bio"
                 label="Bio"
                 style="box-shadow: -2px 0px #8686bd;"
                 solo
@@ -61,6 +64,7 @@
             </v-col>
             <v-col>
               <v-text-field
+                v-model="profile.email"
                 label="Correo"
                 style="box-shadow: -2px 0px #8686bd;"
                 solo
@@ -77,6 +81,7 @@
             </v-col>
             <v-col>
               <v-text-field
+                v-model="profile.website"
                 label="Sitio Web"
                 style="box-shadow: -2px 0px #8686bd;"
                 solo
@@ -103,7 +108,7 @@
                 class="ma-2"
                 outlined
                 color="#8686bd"
-                @click="saveData()"
+                @click="setData()"
               >
                 Guardar
               </v-btn>
@@ -117,15 +122,8 @@
 
 <script>
   import * as nearAPI from 'near-api-js'
+  import { CONFIG } from '@/services/api'
   const { connect, keyStores, WalletConnection, Contract } = nearAPI
-  const config = {
-    networkId: 'testnet',
-    keyStore: new keyStores.BrowserLocalStorageKeyStore(),
-    nodeUrl: 'https://rpc.testnet.near.org',
-    walletUrl: 'https://wallet.testnet.near.org',
-    helperUrl: 'https://helper.testnet.near.org',
-    explorerUrl: 'https://explorer.testnet.near.org',
-  }
   export default {
     data () {
       return {
@@ -137,17 +135,17 @@
         rules: [
           value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
         ],
+        profile: [],
       }
     },
     mounted () {
       this.getData()
     },
     methods: {
-      async saveData () {
-        alert('Aqui')
+      async setData () {
         const CONTRACT_NAME = 'book.bookshop.testnet'
         // connect to NEAR
-        const near = await connect(config)
+        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
         // create wallet connection
         const wallet = new WalletConnection(near)
         const contract = new Contract(wallet.account(), CONTRACT_NAME, {
@@ -169,7 +167,7 @@
       async getData () {
         const CONTRACT_NAME = 'book.bookshop.testnet'
         // connect to NEAR
-        const near = await connect(config)
+        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
         // create wallet connection
         const wallet = new WalletConnection(near)
         const contract = new Contract(wallet.account(), CONTRACT_NAME, {
@@ -177,9 +175,11 @@
           sender: wallet.account(),
         })
         if (wallet.isSignedIn()) {
+          console.log(wallet.account())
           const response = await contract.get_profile({
-            user_id: wallet.account(),
+            user_id: wallet.getAccountId(),
           })
+          this.profile = response
           console.log(response)
         }
       },
