@@ -30,7 +30,7 @@ export default new Router({
         },
         {
           name: 'product',
-          path: 'pages/product',
+          path: 'pages/product/:idserie',
           component: () => import('@/views/dashboard/pages/product/product'),
         },
       ],

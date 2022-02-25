@@ -6,8 +6,9 @@
       <v-row>
         <v-col class="col-md-5 col-sm-5 col-xs-12">
           <img
+            :src="dataNftToken.metadata.media"
+            width="350"
             height="500"
-            src="../../../../assets/img/home/libro2.jpg"
             style="box-shadow: 30px 20px 5px #6868AC;"
           >
         </v-col>
@@ -17,7 +18,7 @@
               class="text-h4 mb-0"
               style="color:#7474B3;"
             >
-              The Arrivals
+              {{ dataNftToken.metadata.title }}
             </p>
             <v-card-actions class="pa-0">
               <p class="text-h5 font-weight-light pt-3">
@@ -36,16 +37,13 @@
               <span class="text-body-2font-weight-thin"> 25 REVIEWS</span>
             </v-card-actions>
             <p class="text-h4 font-weight-thin">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Tincidunt arcu non sodales neque sodales ut etiam. Lectus arcu bibendum at varius vel pharetra. Morbi tristique senectus et netus et malesuada.
-            </p>
-            <p class="text-subtitle-1 font-weight-thin">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis, autem consectetur. Odio officia, quam veritatis obcaecati officiis necessitatibus minima quis natus ducimus provident excepturi voluptate totam laboriosam earum! Voluptatum, laudantium.
+              {{ dataNftToken.metadata.description }}
             </p>
             <p class="text-h6">
               Copias
             </p>
             <p class="text-subtitle-1 font-weight-thin">
-              10 Disponibles
+              {{ dataNftToken.metadata.copies }} Disponibles
             </p>
             <v-btn
               color="#7474B3"
@@ -134,54 +132,33 @@
           'Regular',
           'Moderador',
         ],
-
-        profile: [],
+        serieId: this.$route.params.idserie,
+        dataNftToken: [],
       }
     },
     mounted () {
-      this.getData()
+      this.nftTokensContract()
     },
     methods: {
-      async setData () {
-        alert('Aqui')
-        const CONTRACT_NAME = 'book.bookshop.testnet'
+      async nftTokensContract () {
+        const CONTRACT_NAME = 'bookshop.testnet'
         // connect to NEAR
-        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
+        const near = await connect(
+          CONFIG(new keyStores.BrowserLocalStorageKeyStore()),
+        )
         // create wallet connection
         const wallet = new WalletConnection(near)
         const contract = new Contract(wallet.account(), CONTRACT_NAME, {
-          changeMethods: ['set_profile'],
+          viewMethods: ['get_nft_series_single'],
           sender: wallet.account(),
         })
         if (wallet.isSignedIn()) {
-          await contract.set_profile(
-            {
-              name: 'Linda 2',
-              last_name: 'Rosario 2',
-              email: 'lindaleyrosario@gmail.com2',
-              bio: 'Contenido2',
-              website: 'http://example.com2',
-            },
-          )
-        }
-      },
-      async getData () {
-        const CONTRACT_NAME = 'book.bookshop.testnet'
-        // connect to NEAR
-        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
-        // create wallet connection
-        const wallet = new WalletConnection(near)
-        const contract = new Contract(wallet.account(), CONTRACT_NAME, {
-          changeMethods: ['get_profile'],
-          sender: wallet.account(),
-        })
-        if (wallet.isSignedIn()) {
-          console.log(wallet.account())
-          const response = await contract.get_profile({
-            user_id: wallet.getAccountId(),
+          await contract.get_nft_series_single({
+            token_series_id: this.serieId,
+          }).then((response) => {
+            console.log(response)
+            this.dataNftToken = response
           })
-          this.profile = response
-          console.log(response)
         }
       },
     },
