@@ -125,7 +125,7 @@
         // create wallet connection
         const wallet = new WalletConnection(near)
         wallet.requestSignIn(
-          'book.bookshop.testnet', // contract requesting access
+          'bookshop.testnet', // contract requesting access
           'Near-BookShop', // optional
           'http://localhost:8080/app/#/', // optional
           'http://YOUR-URL.com/failure', // optional

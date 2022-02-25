@@ -4,7 +4,7 @@
       class="pt-12 mt-12"
     >
       <v-row>
-        <v-col class="col-md-5 col-sm-5 col-xs-12">
+        <v-col class="col-md-5 col-sm-5 col-xs-12 text-center">
           <img
             :src="dataNftToken.metadata.media"
             width="350"
