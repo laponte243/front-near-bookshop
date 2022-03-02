@@ -155,11 +155,33 @@
         if (wallet.isSignedIn()) {
           await contract.set_profile(
             {
-              name: 'Linda',
-              last_name: 'Rosario',
-              email: 'lindaleyrosario@gmail.com',
-              bio: 'Contenido',
-              website: 'http://example.com',
+              name: this.profile.name,
+              last_name: this.profile.last_name,
+              email: this.profile.email,
+              bio: this.profile.bio,
+              website: this.profile.website,
+            },
+          )
+        }
+      },
+      async setDataEdit () {
+        const CONTRACT_NAME = 'bookshop.testnet'
+        // connect to NEAR
+        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
+        // create wallet connection
+        const wallet = new WalletConnection(near)
+        const contract = new Contract(wallet.account(), CONTRACT_NAME, {
+          changeMethods: ['set_profile'],
+          sender: wallet.account(),
+        })
+        if (wallet.isSignedIn()) {
+          await contract.set_profile(
+            {
+              name: this.profile.name,
+              last_name: this.profile.last_name,
+              email: this.profile.email,
+              bio: this.profile.bio,
+              website: this.profile.website,
             },
           )
         }

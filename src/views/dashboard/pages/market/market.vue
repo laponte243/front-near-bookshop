@@ -11,7 +11,7 @@
             <v-card class="hover2">
               <v-img
                 :src="item.metadata.media"
-                class="white--text align-end imgOffers"
+                class="white--text imgOffers"
               />
               <div class="textHover pt-4">
                 <h4>
@@ -107,12 +107,13 @@
           sender: wallet.account(),
         })
         if (wallet.isSignedIn()) {
-          const response = await contract.get_nft_series({
+          await contract.get_nft_series({
             from_index: '0',
             limit: 10,
+          }).then((response) => {
+            console.log(response)
+            this.dataNftTokens = response
           })
-          this.dataNftTokens = response
-          console.log(response)
         }
       },
     },

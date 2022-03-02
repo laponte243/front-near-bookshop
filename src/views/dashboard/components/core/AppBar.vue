@@ -48,13 +48,6 @@
           >
             <span>Libros &nbsp;&nbsp;</span>
           </a>
-          <a
-            href="/app#/pages/market"
-            style="text-decoration: none"
-            class="black--text"
-          >
-            <span>Mercado &nbsp;&nbsp;</span>
-          </a>
         </v-col>
         <v-spacer />
         <v-col
@@ -78,15 +71,29 @@
             v-show="sesion"
             class="my-2"
           >
-            <v-chip
-              class="ma-2 white--text"
-              color="#6868ac"
-              @click="signOut()"
-            >
-              <h2 class="pa-5">
-                {{ accountId }}
-              </h2>
-            </v-chip>
+            <v-menu transition="slide-x-transition">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="#6868ac"
+                  class="ma-2 white--text"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  {{ accountId }}
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-itemlink>
+                  <v-list-item-title>
+                    <router-link
+                      class="black--text"
+                      to="pages/user/"
+                    >Perfil</router-link>
+                  </v-list-item-title>
+                  <v-list-item-title @click="signOut()">Cerrar Sesion</v-list-item-title>
+                </v-list-itemlink>
+              </v-list>
+            </v-menu>
           </div>
         </v-col>
       </v-row>
