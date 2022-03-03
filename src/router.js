@@ -33,6 +33,16 @@ export default new Router({
           path: 'pages/product/:idserie',
           component: () => import('@/views/dashboard/pages/product/product'),
         },
+        {
+          name: 'product-registration',
+          path: 'registration',
+          component: () => import('@/views/dashboard/pages/product/registration'),
+        },
+        {
+          name: 'collection',
+          path: 'pages/product/:idserie',
+          component: () => import('@/views/dashboard/pages/product/product'),
+        },
       ],
     },
   ],

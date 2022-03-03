@@ -88,9 +88,29 @@
                     <router-link
                       class="black--text"
                       to="pages/user/"
-                    >Perfil</router-link>
+                    >
+                      Perfil
+                    </router-link>
                   </v-list-item-title>
-                  <v-list-item-title @click="signOut()">Cerrar Sesion</v-list-item-title>
+                  <v-list-item-title>
+                    <router-link
+                      class="black--text"
+                      to="pages/user/"
+                    >
+                      Mis Libros
+                    </router-link>
+                  </v-list-item-title>
+                  <v-list-item-title>
+                    <router-link
+                      class="black--text"
+                      to="pages/product/registration/"
+                    >
+                      Publicar libro
+                    </router-link>
+                  </v-list-item-title>
+                  <v-list-item-title @click="signOut()">
+                    Cerrar Sesion
+                  </v-list-item-title>
                 </v-list-itemlink>
               </v-list>
             </v-menu>
