@@ -71,7 +71,9 @@
             v-show="sesion"
             class="my-2"
           >
-            <v-menu transition="slide-x-transition">
+            <v-menu
+              transition="slide-x-transition"
+            >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   color="#6868ac"
@@ -82,8 +84,8 @@
                   {{ accountId }}
                 </v-btn>
               </template>
-              <v-list>
-                <v-list-itemlink>
+              <v-list class="mt-10">
+                <v-list-itemlink class="black--text">
                   <v-list-item-title>
                     <router-link
                       class="black--text"
@@ -108,8 +110,13 @@
                       Publicar libro
                     </router-link>
                   </v-list-item-title>
-                  <v-list-item-title @click="signOut()">
-                    Cerrar Sesion
+                  <v-list-item-title>
+                    <a
+                      class="black--text"
+                      @click="signOut()"
+                    >
+                      Cerrar Sesion
+                    </a>
                   </v-list-item-title>
                 </v-list-itemlink>
               </v-list>
